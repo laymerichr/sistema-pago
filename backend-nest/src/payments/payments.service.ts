@@ -25,8 +25,6 @@ export class PaymentsService {
   ) {}
 
   async create(dto: CreatePaymentDto): Promise<Payment> {
-    const user = await this.usersService.findOne(dto.userId);
-
     const card = await this.cardsService.findOne(dto.cardId);
     if (card.userId !== dto.userId) {
       throw new BadRequestException(
