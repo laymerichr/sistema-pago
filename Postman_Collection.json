@@ -1,0 +1,228 @@
+{
+  "info": {
+    "_postman_id": "payment-system-api-2026",
+    "name": "Payment System API - Prueba Técnica",
+    "description": "Colección completa para probar el Sistema de Pagos. Backend NestJS + PostgreSQL + Python Service.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "1. Usuarios",
+      "item": [
+        {
+          "name": "Crear Usuario",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/users",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "users"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"firstName\": \"Juan\",\n  \"lastName\": \"P\\u00e9rez\",\n  \"email\": \"juan.perez@example.com\",\n  \"phone\": \"+56912345678\"\n}"
+            }
+          }
+        },
+        {
+          "name": "Listar Usuarios",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{base_url}}/users",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "users"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Obtener Usuario por ID",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{base_url}}/users/1",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "users",
+                "1"
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "2. Tarjetas",
+      "item": [
+        {
+          "name": "Registrar Tarjeta",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/cards",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "cards"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"userId\": 1,\n  \"cardNumber\": \"4111111111111111\",\n  \"cardHolder\": \"JUAN PEREZ\",\n  \"expirationMonth\": \"12\",\n  \"expirationYear\": \"2028\",\n  \"cvv\": \"123\",\n  \"brand\": \"visa\"\n}"
+            }
+          }
+        },
+        {
+          "name": "Listar Tarjetas por Usuario",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{base_url}}/cards/user/1",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "cards",
+                "user",
+                "1"
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "3. Pagos",
+      "item": [
+        {
+          "name": "Crear Pago",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/payments",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "payments"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"userId\": 1,\n  \"cardId\": 1,\n  \"amount\": 150.0,\n  \"currency\": \"USD\",\n  \"description\": \"Pago de prueba t\\u00e9cnica\"\n}"
+            }
+          }
+        },
+        {
+          "name": "Historial de Pagos por Usuario",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{base_url}}/payments/user/1",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "payments",
+                "user",
+                "1"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Obtener Pago por ID",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{base_url}}/payments/1",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "payments",
+                "1"
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "4. Health Check",
+      "item": [
+        {
+          "name": "Health Backend",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{base_url}}/health",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "health"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Health Python Service",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{python_service_url}}/health",
+              "host": [
+                "{{python_service_url}}"
+              ],
+              "path": [
+                "health"
+              ]
+            }
+          }
+        }
+      ]
+    }
+  ],
+  "variable": [
+    {
+      "key": "base_url",
+      "value": "http://localhost:3000",
+      "type": "string"
+    },
+    {
+      "key": "python_service_url",
+      "value": "http://localhost:8000",
+      "type": "string"
+    }
+  ]
+}

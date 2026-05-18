@@ -1,0 +1,54 @@
+version: '3.8'
+
+services:
+  postgres:
+    image: postgres:16-alpine
+    container_name: payments-postgres
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: payments_db
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./database/schema.sql:/docker-entrypoint-initdb.d/schema.sql
+      - ./database/seed.sql:/docker-entrypoint-initdb.d/seed.sql
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres -d payments_db"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  python-service:
+    build: ./python-service
+    container_name: python-service
+    ports:
+      - "8000:8000"
+    environment:
+      - PORT=8000
+      - APPROVAL_RATE=0.8
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/health"]
+      interval: 10s
+      timeout: 5s
+      retries: 3
+
+  backend-nest:
+    build: ./backend-nest
+    container_name: payments-backend
+    ports:
+      - "3000:3000"
+    environment:
+      - NODE_ENV=development
+      - PORT=3000
+      - DATABASE_URL=postgresql://postgres:postgres@postgres:5432/payments_db?schema=public
+      - PYTHON_SERVICE_URL=http://python-service:8000
+    depends_on:
+      postgres:
+        condition: service_healthy
+      payment-processor:
+        condition: service_healthy
+
+volumes:
+  postgres_data:
