@@ -196,7 +196,7 @@ docker-compose down
 ### Pagos
 | Metodo | Endpoint | Descripcion |
 |--------|----------|-------------|
-| POST | /api/payments | Crear pago (llama al procesador Python) |
+| POST | /api/payments | Crear pago (llama al Python Service) |
 | GET | /api/payments/user/:userId | Historial de pagos |
 | GET | /api/payments/:id | Detalle de pago |
 

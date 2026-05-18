@@ -1,8 +1,8 @@
 {
   "info": {
     "_postman_id": "payment-system-api-2026",
-    "name": "Payment System API - Prueba Técnica",
-    "description": "Colección completa para probar el Sistema de Pagos. Backend NestJS + PostgreSQL + Python Service.",
+    "name": "Payment System API - Prueba Tecnica",
+    "description": "Coleccion completa para probar el Sistema de Pagos. Backend NestJS + PostgreSQL + Python Processor.",
     "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
   },
   "item": [
@@ -30,7 +30,7 @@
             },
             "body": {
               "mode": "raw",
-              "raw": "{\n  \"firstName\": \"Juan\",\n  \"lastName\": \"P\\u00e9rez\",\n  \"email\": \"juan.perez@example.com\",\n  \"phone\": \"+56912345678\"\n}"
+              "raw": "{\n  \"firstName\": \"Juan\",\n  \"lastName\": \"Perez\",\n  \"email\": \"juan.perez@test.com\",\n  \"phone\": \"+56912345678\"\n}"
             }
           }
         },
@@ -53,6 +53,22 @@
           "name": "Obtener Usuario por ID",
           "request": {
             "method": "GET",
+            "url": {
+              "raw": "{{base_url}}/users/1",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "users",
+                "1"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Eliminar Usuario",
+          "request": {
+            "method": "DELETE",
             "url": {
               "raw": "{{base_url}}/users/1",
               "host": [
@@ -111,6 +127,22 @@
               ]
             }
           }
+        },
+        {
+          "name": "Eliminar Tarjeta",
+          "request": {
+            "method": "DELETE",
+            "url": {
+              "raw": "{{base_url}}/cards/1",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "cards",
+                "1"
+              ]
+            }
+          }
         }
       ]
     },
@@ -138,7 +170,7 @@
             },
             "body": {
               "mode": "raw",
-              "raw": "{\n  \"userId\": 1,\n  \"cardId\": 1,\n  \"amount\": 150.0,\n  \"currency\": \"USD\",\n  \"description\": \"Pago de prueba t\\u00e9cnica\"\n}"
+              "raw": "{\n  \"userId\": 1,\n  \"cardId\": 1,\n  \"amount\": 150.0,\n  \"currency\": \"USD\",\n  \"description\": \"Pago de prueba tecnica\"\n}"
             }
           }
         },
@@ -196,7 +228,7 @@
           }
         },
         {
-          "name": "Health Python Service",
+          "name": "Health Python Processor",
           "request": {
             "method": "GET",
             "url": {
@@ -216,7 +248,7 @@
   "variable": [
     {
       "key": "base_url",
-      "value": "http://localhost:3000",
+      "value": "http://localhost:3000/api",
       "type": "string"
     },
     {
