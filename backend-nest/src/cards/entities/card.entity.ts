@@ -14,8 +14,6 @@ import { Payment } from '../../payments/entities/payment.entity';
 /**
  * Entidad: tarjetas
  * Almacena datos de tarjetas de credito asociadas a usuarios.
- * NOTA DE SEGURIDAD: En produccion real, el card_number y cvv DEBEN
- * tokenizarse (Stripe Vault, Braintree, etc.). Aqui usamos datos ficticios.
  */
 @Entity('tarjetas')
 export class Card {

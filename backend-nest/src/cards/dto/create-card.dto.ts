@@ -1,4 +1,10 @@
-import { IsInt, IsNotEmpty, IsString, Length, MaxLength } from 'class-validator';
+import {
+  IsInt,
+  IsNotEmpty,
+  IsString,
+  Length,
+  MaxLength,
+} from 'class-validator';
 
 /**
  * DTO para registro de tarjeta de credito.

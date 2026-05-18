@@ -1,4 +1,4 @@
-import { Injectable, NotFoundException, BadRequestException } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { Card } from './entities/card.entity';
@@ -20,7 +20,9 @@ export class CardsService {
   async create(dto: CreateCardDto): Promise<Card> {
     const userExists = await this.usersService.exists(dto.userId);
     if (!userExists) {
-      throw new NotFoundException(`Usuario ${dto.userId} no existe. No se puede registrar tarjeta.`);
+      throw new NotFoundException(
+        `Usuario ${dto.userId} no existe. No se puede registrar tarjeta.`,
+      );
     }
 
     const lastFour = dto.cardNumber.slice(-4);
@@ -51,7 +53,12 @@ export class CardsService {
 
   async deactivate(id: number): Promise<void> {
     const card = await this.findOne(id);
-    card.isActive = false;
+    card.isActive = !card.isActive;
     await this.cardRepository.save(card);
+  }
+
+  async remove(id: number): Promise<void> {
+    const card = await this.findOne(id);
+    await this.cardRepository.remove(card);
   }
 }
