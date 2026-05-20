@@ -168,6 +168,7 @@ docker-compose up --build
 Servicios disponibles:
 - API NestJS: http://localhost:3000/api
 - Python Service: http://localhost:8000
+- Docs con Swagger: http://localhost:3000/api/docs/
 - PostgreSQL: localhost:5432 (user: postgres, pass: postgres, db: payments_db)
 
 La base de datos se inicializa automaticamente con el schema y seed al levantar el contenedor de Postgres.
